@@ -2,16 +2,20 @@ package cz.cvut.fel.pda.stm_exs.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
 
-
+@EActivity(R.layout.activity_main)
 public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
     }
 
 
@@ -35,5 +39,20 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Click(R.id.fab)
+    public void fab() {
+        Toast.makeText(this, "Fab button", Toast.LENGTH_SHORT).show();
+        Log.wtf("FAB:", "button click");
+
+    }
+
+    @Click(R.id.dashboard_button1)
+    public void button() {
+        Toast.makeText(this, "dashboard button", Toast.LENGTH_SHORT).show();
+        Log.wtf("Dashboard:", "button click");
+
+
     }
 }

@@ -19,22 +19,22 @@ repositories {
     jcenter()
 }
 
-//apt {
-//    arguments {
-//        androidManifestFile variant.processResources.manifestFile
-//        resourcePackageName 'cz.cvut.fel.pda.stm_exs.app'
-//
-//    }
-//}
+apt {
+    arguments {
+        androidManifestFile variant.outputs[0].processResources.manifestFile
+        resourcePackageName 'cz.cvut.fel.pda.stm_exs.app'
+
+    }
+}
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 18
+    buildToolsVersion '19.1.0'
 
     defaultConfig {
         applicationId "cz.cvut.fel.pda.stm_exs.app"
-        minSdkVersion 16
-        targetSdkVersion 19
+        minSdkVersion 18
+        targetSdkVersion 18
         versionCode 1
         versionName "1.0"
     }
@@ -69,6 +69,8 @@ dependencies {
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
 
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+
+    compile 'com.shamanland:fab:0.0.8'
 
     apt "org.androidannotations:androidannotations:3+"
 
