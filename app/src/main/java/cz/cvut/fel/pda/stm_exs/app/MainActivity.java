@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Click(R.id.fab)
+    @Click(R.id.action_start)
     public void fab() {
         Toast.makeText(this, "Fab button", Toast.LENGTH_SHORT).show();
         Log.wtf("FAB:", "button click");
