@@ -1,0 +1,24 @@
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:background="@android:color/holo_purple"-->
+<!--tools:context="cz.cvut.fel.pda.stm_exs.app.view.fragment.ClosedQuestionFragment">-->
+
+<!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+<!--<TextView-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:text="Closed Question"/>-->
+
+
+<!--</FrameLayout>-->
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/text1"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:textSize="128sp"
+          android:padding="32dp"
+          android:text="Swipe me"/>

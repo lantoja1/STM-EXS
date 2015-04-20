@@ -1,11 +1,13 @@
-package cz.cvut.fel.pda.stm_exs.app;
+package cz.cvut.fel.pda.stm_exs.app.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import cz.cvut.fel.pda.stm_exs.app.R;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
@@ -42,9 +44,10 @@ public class MainActivity extends Activity {
     }
 
     @Click(R.id.action_start)
-    public void fab() {
-        Toast.makeText(this, "Fab button", Toast.LENGTH_SHORT).show();
-        Log.wtf("FAB:", "button click");
+    public void startSampling() {
+        Intent intent = new Intent(this, QuestionActivity_.class);
+        startActivity(intent);
+        Log.i("Dashboard:", "Action Start sampling pressed");
 
     }
 

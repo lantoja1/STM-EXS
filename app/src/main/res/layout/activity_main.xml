@@ -4,108 +4,114 @@
                 android:layout_height="match_parent"
                 tools:context=".MainActivity">
 
-        <LinearLayout
-                android:id="@+id/header"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@android:color/white"
-                android:layout_alignParentTop="true">
+    <LinearLayout
+            android:id="@+id/header"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@android:color/white"
+            android:layout_alignParentTop="true">
 
-                <ImageView
-                        android:layout_gravity="top"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/logo"/>
+        <ImageView
+                android:layout_gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/dashboard"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            android:background="@drawable/header"
+            android:layout_alignParentEnd="true">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dashboard_first"
+                android:layout_weight="1"
+                android:weightSum="10"
+                >
+
+            <Button
+                    style="@style/DashboardButton"
+                    android:layout_gravity="bottom"
+                    android:textSize="25dp"
+                    android:padding="25dp"
+                    android:background="@drawable/action_start_selector"
+                    android:id="@+id/dashboard_button1"
+                    android:layout_weight="5"
+
+                    android:text="button1"/>
+
+            <Button
+                    style="@style/DashboardButton"
+                    android:layout_gravity="bottom"
+                    android:textSize="25dp"
+                    android:padding="25dp"
+                    android:background="@drawable/action_start_selector"
+                    android:layout_weight="5"
+
+
+                    android:text="button2"/>
         </LinearLayout>
 
-        <GridLayout
-                android:id="@+id/dashboard"
-                android:orientation="horizontal"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/header"
-                android:background="@drawable/header"
-                android:rowCount="2"
-                android:columnCount="2"
-                android:layout_alignParentEnd="true">
-
-                <Button
-                        style="@style/DashboardButton"
-                        android:layout_gravity="bottom"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:textSize="25dp"
-                        android:padding="25dp"
-                        android:background="@drawable/action_start_selector"
-
-                        android:id="@+id/dashboard_button1"
-                        android:text="button1"
-                        />
-
-                <Button
-                        style="@style/DashboardButton"
-
-                        android:layout_gravity="bottom"
-                        android:layout_row="0"
-                        android:layout_column="1"
-                        android:textSize="25dp"
-                        android:padding="25dp"
-                        android:background="@drawable/action_start_selector"
-
-
-                        android:text="button2"
-                        />
-
-                <Button
-                        style="@style/DashboardButton"
-                        android:layout_row="1"
-                        android:layout_column="0"
-                        android:textSize="25dp"
-                        android:padding="25dp"
-                        android:background="@drawable/action_start_selector"
-
-                        android:text="button3"
-                        />
-
-                <Button
-                        style="@style/DashboardButton"
-                        android:layout_row="1"
-                        android:layout_column="1"
-                        android:textSize="25dp"
-                        android:padding="25dp"
-                        android:background="@drawable/action_start_selector"
-
-                        android:text="button4"
-                        />
-        </GridLayout>
-
-        <Button
-                android:id="@+id/action_start"
-                android:text="@string/action_start"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/action_start_shape"
-                android:layout_alignBottom="@id/header"
-                android:layout_marginBottom="-75dp"
-                android:layout_centerHorizontal="true"
-                />
+                android:weightSum="10"
+                >
 
-        <!--<com.shamanland.fab.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignBottom="@id/header"-->
-        <!--android:layout_marginBottom="@dimen/floating_action_button_margin_normal_minus"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginRight="@dimen/floating_action_button_margin_normal"-->
-        <!--android:text="@string/action_start"-->
-        <!--app:floatingActionButtonColor="@color/action_start_selector"-->
-        <!--app:floatingActionButtonSize="normal"-->
-        <!-->-->
-        <!--</com.shamanland.fab.FloatingActionButton>-->
+            <Button
+                    style="@style/DashboardButton"
+                    android:textSize="25dp"
+                    android:padding="25dp"
+                    android:background="@drawable/action_start_selector"
+                    android:layout_weight="5"
+
+                    android:text="button3"/>
+
+            <Button
+                    style="@style/DashboardButton"
+                    android:textSize="25dp"
+                    android:padding="25dp"
+                    android:background="@drawable/action_start_selector"
+                    android:layout_weight="5"
+
+                    android:text="button4"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+            android:id="@+id/action_start"
+            android:text="@string/action_start"
+            android:textColor="#FFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/action_start_shape"
+            android:layout_alignBottom="@id/header"
+            android:layout_marginBottom="-75dp"
+            android:layout_centerHorizontal="true"
+            />
+
+    <!--<com.shamanland.fab.FloatingActionButton-->
+    <!--android:id="@+id/fab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignBottom="@id/header"-->
+    <!--android:layout_marginBottom="@dimen/floating_action_button_margin_normal_minus"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_marginRight="@dimen/floating_action_button_margin_normal"-->
+    <!--android:text="@string/action_start"-->
+    <!--app:floatingActionButtonColor="@color/action_start_selector"-->
+    <!--app:floatingActionButtonSize="normal"-->
+    <!-->-->
+    <!--</com.shamanland.fab.FloatingActionButton>-->
 </RelativeLayout>
