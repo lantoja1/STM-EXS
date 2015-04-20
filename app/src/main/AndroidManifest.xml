@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="cz.cvut.fel.pda.stm_exs.app">
+    package="cz.cvut.fel.pda.stm_exs.app" >
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
         <activity
-                android:name=".view.activity.MainActivity_"
-                android:label="@string/app_name">
+            android:name=".view.activity.MainActivity_"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".view.activity.QuestionActivity_"
-                android:label="@string/title_activity_question"
-                >
-
+            android:name=".view.activity.QuestionActivity_"
+            android:label="@string/title_activity_question" >
         </activity>
         <activity
-                android:name="cz.cvut.fel.pda.stm_exs.app.view.activity.CollectionDemoActivity_"
-                android:label="demo"/>
-
+            android:name=".view.activity.SettingsActivity_"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

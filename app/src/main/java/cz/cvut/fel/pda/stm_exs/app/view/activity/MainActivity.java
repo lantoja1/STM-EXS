@@ -51,11 +51,18 @@ public class MainActivity extends Activity {
 
     }
 
-    @Click(R.id.dashboard_button1)
-    public void button() {
+    @Click(R.id.dashboard_profile)
+    public void buttonProfile() {
         Toast.makeText(this, "dashboard button", Toast.LENGTH_SHORT).show();
         Log.wtf("Dashboard:", "button click");
 
 
+    }
+
+    @Click(R.id.dashboard_settings)
+    public void buttonSettings() {
+        Intent intent = new Intent(this, SettingsActivity_.class);
+        startActivity(intent);
+        Log.wtf("Dashboard:", "button click");
     }
 }

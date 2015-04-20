@@ -40,16 +40,17 @@
                     style="@style/DashboardButton"
                     android:layout_gravity="bottom"
                     android:background="@drawable/action_start_selector"
-                    android:id="@+id/dashboard_button1"
+                    android:id="@+id/dashboard_profile"
                     android:layout_weight="5"
-                    android:text="@string/menu_profile"/>
+                    android:text="@string/dashboard_profile"/>
 
             <Button
                     style="@style/DashboardButton"
                     android:layout_gravity="bottom"
                     android:background="@drawable/action_start_selector"
+                    android:id="@+id/dashboard_answers"
                     android:layout_weight="5"
-                    android:text="@string/menu_answers"/>
+                    android:text="@string/dashboard_answers"/>
         </LinearLayout>
 
         <LinearLayout
@@ -61,14 +62,16 @@
             <Button
                     style="@style/DashboardButton"
                     android:background="@drawable/action_start_selector"
+                    android:id="@+id/dashboard_settings"
                     android:layout_weight="5"
-                    android:text="@string/menu_settings"/>
+                    android:text="@string/dashboard_settings"/>
 
             <Button
                     style="@style/DashboardButton"
                     android:background="@drawable/action_start_selector"
+                    android:id="@+id/dashboard_skip"
                     android:layout_weight="5"
-                    android:text="@string/menu_skip"/>
+                    android:text="@string/dashboard_skip"/>
         </LinearLayout>
 
     </LinearLayout>
