@@ -39,24 +39,17 @@
             <Button
                     style="@style/DashboardButton"
                     android:layout_gravity="bottom"
-                    android:textSize="25dp"
-                    android:padding="25dp"
                     android:background="@drawable/action_start_selector"
                     android:id="@+id/dashboard_button1"
                     android:layout_weight="5"
-
-                    android:text="button1"/>
+                    android:text="@string/menu_profile"/>
 
             <Button
                     style="@style/DashboardButton"
                     android:layout_gravity="bottom"
-                    android:textSize="25dp"
-                    android:padding="25dp"
                     android:background="@drawable/action_start_selector"
                     android:layout_weight="5"
-
-
-                    android:text="button2"/>
+                    android:text="@string/menu_answers"/>
         </LinearLayout>
 
         <LinearLayout
@@ -67,21 +60,15 @@
 
             <Button
                     style="@style/DashboardButton"
-                    android:textSize="25dp"
-                    android:padding="25dp"
                     android:background="@drawable/action_start_selector"
                     android:layout_weight="5"
-
-                    android:text="button3"/>
+                    android:text="@string/menu_settings"/>
 
             <Button
                     style="@style/DashboardButton"
-                    android:textSize="25dp"
-                    android:padding="25dp"
                     android:background="@drawable/action_start_selector"
                     android:layout_weight="5"
-
-                    android:text="button4"/>
+                    android:text="@string/menu_skip"/>
         </LinearLayout>
 
     </LinearLayout>
