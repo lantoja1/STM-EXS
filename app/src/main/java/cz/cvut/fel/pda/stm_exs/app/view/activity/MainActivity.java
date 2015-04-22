@@ -1,5 +1,6 @@
 package cz.cvut.fel.pda.stm_exs.app.view.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        ActionBar actionBar = getActionBar();
+        //actionBar.
+
         return true;
     }
 

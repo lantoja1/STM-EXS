@@ -1,14 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/holo_purple"
-             tools:context="cz.cvut.fel.pda.stm_exs.app.view.fragment.MeasureQuestionFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:padding="20dp"/>
+
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Measure question"/>
+            android:layout_marginTop="100dp"
+            >
 
-</FrameLayout>
+        <SeekBar
+                android:id="@+id/question_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+        </SeekBar>
+    </ScrollView>
+</LinearLayout>
+
+

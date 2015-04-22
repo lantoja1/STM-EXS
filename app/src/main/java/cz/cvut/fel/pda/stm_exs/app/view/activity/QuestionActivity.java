@@ -26,11 +26,13 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
 import cz.cvut.fel.pda.stm_exs.app.view.adapter.QuestionsPagerAdapter;
 import cz.cvut.fel.pda.stm_exs.app.view.fragment.ClosedQuestionFragment;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.ClosedQuestionFragment_;
 import cz.cvut.fel.pda.stm_exs.app.view.fragment.MeasureQuestionFragment;
+import cz.cvut.fel.pda.stm_exs.app.view.fragment.MultiClosedQuestionFragment;
 import cz.cvut.fel.pda.stm_exs.app.view.fragment.OpenQuestionFragment;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 
 import java.util.ArrayList;
@@ -38,6 +40,9 @@ import java.util.List;
 
 @EActivity
 public class QuestionActivity extends FragmentActivity {
+
+    @Bean
+    protected DataModel dataModel;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments representing
@@ -103,11 +108,13 @@ public class QuestionActivity extends FragmentActivity {
     }
 
     private List<Fragment> buildFragments() {
+
+
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new ClosedQuestionFragment_());
-        fragments.add(new ClosedQuestionFragment());
-        fragments.add(MeasureQuestionFragment.newInstance());
-        fragments.add(OpenQuestionFragment.newInstance());
+        fragments.add(ClosedQuestionFragment.newInstance(dataModel.getQuestion("id_question1")));
+        fragments.add(MeasureQuestionFragment.newInstance(dataModel.getQuestion("id_question4")));
+        fragments.add(OpenQuestionFragment.newInstance(dataModel.getQuestion("id_question2")));
+        fragments.add(MultiClosedQuestionFragment.newInstance(dataModel.getQuestion("id_question3")));
         return fragments;
     }
 

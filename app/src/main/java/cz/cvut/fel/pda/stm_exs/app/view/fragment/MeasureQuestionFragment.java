@@ -2,20 +2,33 @@ package cz.cvut.fel.pda.stm_exs.app.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+import cz.cvut.fel.pda.stm_exs.app.domain.Question;
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
  * Use the {@link MeasureQuestionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 @EFragment(R.layout.fragment_measure_question)
 public class MeasureQuestionFragment extends Fragment {
+    @Bean
+    protected DataModel dataModel;
+
+    @ViewById(R.id.question_text)
+    protected TextView questionTextView;
+
+    private Question question;
 
 
     /**
@@ -24,9 +37,11 @@ public class MeasureQuestionFragment extends Fragment {
      *
      * @return A new instance of fragment MeasureQuestionFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static MeasureQuestionFragment newInstance() {
+    public static MeasureQuestionFragment newInstance(Question question) {
         MeasureQuestionFragment fragment = new MeasureQuestionFragment_();
+        Bundle args = new Bundle();
+        args.putString("id", question.getId());
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -35,10 +50,26 @@ public class MeasureQuestionFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (question == null) {
+            String questionId = getArguments().getString("id");
+            question = dataModel.getQuestion(questionId);
+
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_measure_question, container, false);
+    }
+
+    @AfterViews
+    protected void initViews() {
+        questionTextView.setText(question.getText());
+        Log.i("Activity", "Fragment: Measure question views rendered");
     }
 
 

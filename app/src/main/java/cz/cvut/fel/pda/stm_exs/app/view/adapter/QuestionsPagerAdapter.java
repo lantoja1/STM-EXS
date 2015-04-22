@@ -3,7 +3,7 @@ package cz.cvut.fel.pda.stm_exs.app.view.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  *         A {@link QuestionsPagerAdapter} that returns a fragment corresponding to
  *         one of the sections/tabs/pages.
  */
-public class QuestionsPagerAdapter extends FragmentStatePagerAdapter {
+public class QuestionsPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragments;
 
