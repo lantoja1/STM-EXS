@@ -51,6 +51,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            debuggable true
+        }
+
     }
     packagingOptions {
         exclude 'META-INF/notice.txt'
