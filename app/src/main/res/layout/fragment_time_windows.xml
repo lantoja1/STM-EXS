@@ -15,8 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-                android:text="@string/hello_blank_fragment" />
+            <ExpandableListView
+                android:id="@+id/lvExp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -33,7 +35,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/floating_action_button_margin_normal"
                     android:text="ADD"
-                    android:textSize="40sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:floatingActionButtonColor="@color/dark_purple"
                     app:floatingActionButtonSize="normal"

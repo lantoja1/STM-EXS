@@ -42,12 +42,9 @@ public class ThemesListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<String> themes = new ArrayList<String>(timeWindowsModel.themesMap.keySet());
-        Collections.sort(themes);
-
         // Populate list with theme names
         setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_activated_1, themes));
+                android.R.layout.simple_list_item_activated_1, timeWindowsModel.getSortedThemesNames()));
 
         // Check to see if we have a frame in which to embed the details
         // fragment directly in the containing UI.
