@@ -9,11 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import cz.cvut.fel.pda.stm_exs.app.domain.Time;
 import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 
-@EBean
+@EBean(scope = EBean.Scope.Singleton)
 public class TimeWindowsModel {
     public Map<String, Map<Integer, TimeWindow>> themesMap;
 
-    public Map<Integer, TimeWindow> getThemeSettings(String themeId) {
+    public Map<Integer, TimeWindow> getThemeTimeWindows(String themeId) {
         return themesMap.get(themeId);
     }
 

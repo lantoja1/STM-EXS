@@ -62,15 +62,13 @@ public class TimeWindowsFragment extends Fragment {
     public void onCreate(Bundle state) {
         super.onCreate(state);
 
-        //  setContentView(R.layout.a_example_list);
-
-        View fab = getActivity().findViewById(R.id.add_interval);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "add interval", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        View fab = getActivity().findViewById(R.id.add_interval);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(), "add interval", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        ListView listView = (ListView) findViewById(android.R.id.list);
 //        listView.setAdapter(new ExampleAdapter());

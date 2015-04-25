@@ -21,8 +21,6 @@ import cz.cvut.fel.pda.stm_exs.app.view.activity.TimeWindowsActivity_;
 
 /**
  * A fragment representing a list of Items.
- * <p/>
- * <p/>
  */
 @EFragment(R.layout.fragment_settings)
 public class ThemesListFragment extends ListFragment {
@@ -41,8 +39,8 @@ public class ThemesListFragment extends ListFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         ArrayList<String> themes = new ArrayList<String>(timeWindowsModel.themesMap.keySet());
         Collections.sort(themes);
@@ -53,7 +51,7 @@ public class ThemesListFragment extends ListFragment {
 
         // Check to see if we have a frame in which to embed the details
         // fragment directly in the containing UI.
-        View detailsFrame = getActivity().findViewById(R.id.details);
+        View detailsFrame = getActivity().findViewById(R.id.time_windows_of_chosen_theme_frame);
         mDualPane = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
         if (savedInstanceState != null) {
@@ -97,7 +95,7 @@ public class ThemesListFragment extends ListFragment {
 
             // Check what fragment is currently shown, replace if needed.
             TimeWindowsFragment details = (TimeWindowsFragment)
-                    getFragmentManager().findFragmentById(R.id.details);
+                    getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
             if (details == null || details.getShownIndex() != index) {
                 // Make new fragment to show this selection.
                 details = TimeWindowsFragment.newInstance(index);
@@ -105,11 +103,7 @@ public class ThemesListFragment extends ListFragment {
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                if (index == 0) {
-                    ft.replace(R.id.details, details);
-//                } else {
-//                    ft.replace(R.id.a_item, details);
-//                }
+                ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
             }

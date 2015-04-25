@@ -10,6 +10,7 @@ import org.androidannotations.annotations.EActivity;
 
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.view.fragment.TimeWindowsFragment;
+import cz.cvut.fel.pda.stm_exs.app.view.fragment.TimeWindowsFragment_;
 
 @EActivity
 public class TimeWindowsActivity extends Activity {
@@ -28,7 +29,7 @@ public class TimeWindowsActivity extends Activity {
 
         if (savedInstanceState == null) {
             // During initial setup, plug in the details fragment.
-            TimeWindowsFragment details = new TimeWindowsFragment();
+            TimeWindowsFragment details = new TimeWindowsFragment_();
             details.setArguments(getIntent().getExtras());
             getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
         }
@@ -38,7 +39,7 @@ public class TimeWindowsActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings_details, menu);
+        getMenuInflater().inflate(R.menu.menu_time_windows, menu);
         return true;
     }
 
