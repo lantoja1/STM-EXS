@@ -1,0 +1,10 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <fragment
+            class="cz.cvut.fel.pda.stm_exs.app.view.fragment.ThemesFragment_"
+            android:id="@+id/themeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</FrameLayout>

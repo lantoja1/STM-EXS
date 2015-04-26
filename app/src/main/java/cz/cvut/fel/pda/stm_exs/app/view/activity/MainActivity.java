@@ -51,22 +51,26 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, QuestionActivity_.class);
         startActivity(intent);
         Log.i("Dashboard:", "Action Start sampling pressed");
-
     }
 
     @Click(R.id.dashboard_profile)
     public void buttonProfile() {
         Intent intent = new Intent(this, ProfileActivity_.class);
         startActivity(intent);
-        Log.wtf("Dashboard:", "Action My Profile pressed");
-
-
+        Log.i("Dashboard:", "Action My Profile pressed");
     }
 
     @Click(R.id.dashboard_settings)
     public void buttonSettings() {
         Intent intent = new Intent(this, SettingsActivity_.class);
         startActivity(intent);
-        Log.wtf("Dashboard:", "button click");
+        Log.i("Dashboard:", "button click");
+    }
+
+    @Click(R.id.dashboard_answers)
+    public void buttonAnswers() {
+        Intent intent = new Intent(this, AnswersActivity_.class);
+        startActivity(intent);
+        Log.i("Dashboard:", "Action My Answers pressed");
     }
 }

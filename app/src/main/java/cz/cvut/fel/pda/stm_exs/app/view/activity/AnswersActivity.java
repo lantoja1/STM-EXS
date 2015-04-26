@@ -5,20 +5,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
-import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity
-public class SettingsActivity extends Activity {
+public class AnswersActivity extends Activity {
 
-    @Bean
-    protected TimeWindowsModel timeWindowsModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_answers);
     }
 
     @Override

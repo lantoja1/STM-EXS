@@ -15,10 +15,10 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 
 /**
- * A fragment representing a list of Items.
+ * @author jan.lantora
  */
 @EFragment(R.layout.activity_settings)
-public class ThemesListFragment extends ListFragment {
+public class ThemesFragment extends ListFragment {
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -30,7 +30,7 @@ public class ThemesListFragment extends ListFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ThemesListFragment() {
+    public ThemesFragment() {
     }
 
     @Override
@@ -106,7 +106,7 @@ public class ThemesListFragment extends ListFragment {
         }
     }
 
-    private void replaceFragment(int index){
+    private void replaceFragment(int index) {
         // Make new fragment to show this selection.
         TimeWindowsFragment details = TimeWindowsFragment.newInstance(index);
         // Execute a transaction, replacing any existing fragment
@@ -116,4 +116,5 @@ public class ThemesListFragment extends ListFragment {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
+
 }

@@ -36,6 +36,14 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_"/>
         </activity>
+        <activity
+                android:name=".view.activity.AnswersActivity_"
+                android:label="@string/title_activity_answers"
+                android:parentActivityName=".view.activity.MainActivity_">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_"/>
+        </activity>
     </application>
 
 </manifest>

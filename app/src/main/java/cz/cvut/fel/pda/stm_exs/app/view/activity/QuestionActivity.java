@@ -28,10 +28,7 @@ import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
 import cz.cvut.fel.pda.stm_exs.app.view.adapter.QuestionsPagerAdapter;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.ClosedQuestionFragment;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.MeasureQuestionFragment;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.MultiClosedQuestionFragment;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.OpenQuestionFragment;
+import cz.cvut.fel.pda.stm_exs.app.view.fragment.*;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 
@@ -115,6 +112,7 @@ public class QuestionActivity extends FragmentActivity {
         fragments.add(MeasureQuestionFragment.newInstance(dataModel.getQuestion("id_question4")));
         fragments.add(OpenQuestionFragment.newInstance(dataModel.getQuestion("id_question2")));
         fragments.add(MultiClosedQuestionFragment.newInstance(dataModel.getQuestion("id_question3")));
+        fragments.add(EndSamplingFragment.newInstance());
         return fragments;
     }
 
