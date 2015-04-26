@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -57,8 +56,9 @@ public class MainActivity extends Activity {
 
     @Click(R.id.dashboard_profile)
     public void buttonProfile() {
-        Toast.makeText(this, "dashboard button", Toast.LENGTH_SHORT).show();
-        Log.wtf("Dashboard:", "button click");
+        Intent intent = new Intent(this, ProfileActivity_.class);
+        startActivity(intent);
+        Log.wtf("Dashboard:", "Action My Profile pressed");
 
 
     }
