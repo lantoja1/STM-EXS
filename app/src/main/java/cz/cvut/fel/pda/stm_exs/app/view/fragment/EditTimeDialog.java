@@ -62,11 +62,11 @@ public class EditTimeDialog extends DialogFragment implements TimePickerDialog.O
         if (timeListView != null) {
             List<Map<String, String>> data = new ArrayList<Map<String, String>>();
             Map<String, String> start = new HashMap<String, String>(2);
-            start.put("title", "Začátek časového okna");
+            start.put("title", "Start of time window");
             start.put("value", tw.getStart().toString());
             data.add(start);
             Map<String, String> end = new HashMap<String, String>(2);
-            end.put("title", "Konec časového okna");
+            end.put("title", "End of time window");
             end.put("value", tw.getEnd().toString());
             data.add(end);
 
