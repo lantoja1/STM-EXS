@@ -24,4 +24,9 @@ public class Time {
     public void setHour(int hour) {
         this.hour = hour;
     }
+
+    @Override
+    public String toString() {
+        return hour + ":" + (minute < 10 ? "0" : "") + minute;
+    }
 }

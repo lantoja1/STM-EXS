@@ -59,7 +59,7 @@ public class ListViewAdapter extends ArrayAdapter<TimeWindow> {
     public void add(TimeWindow tw) {
         timeWindows.add(tw);
         notifyDataSetChanged();
-        Toast.makeText(context, timeWindows.toString(), Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context, timeWindows.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

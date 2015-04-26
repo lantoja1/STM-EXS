@@ -3,14 +3,20 @@ package cz.cvut.fel.pda.stm_exs.app.domain;
 import java.util.Arrays;
 
 public class TimeWindow {
+    private int id;
     private Time start;
     private Time end;
     private boolean[] days;
 
-    public TimeWindow(){
+    public TimeWindow(int id){
+        this.id = id;
         start = new Time(0, 0);
         end = new Time(0, 0);
         days = new boolean[]{true, true, true, true, true, false, false};
+    }
+
+    public int getId() {
+        return id;
     }
 
     public Time getStart() {
@@ -43,9 +49,9 @@ public class TimeWindow {
 
     @Override
     public String toString() {
-        return start.getHour() + ":" + (start.getMinute() < 10 ? "0" : "") + start.getMinute() + "-"
-                + end.getHour() + ":" + (end.getMinute() < 10 ? "0" : "") + end.getMinute()
-                + " " + daysToString(days);
+        return start.getHour() + ":" + (start.getMinute() < 10 ? "0" : "") + start.getMinute() +
+                " - " + end.getHour() + ":" + (end.getMinute() < 10 ? "0" : "") + end.getMinute() +
+                " " + daysToString(days);
     }
 
     private String daysToString(boolean[] days) {
@@ -62,4 +68,7 @@ public class TimeWindow {
         return st.toString();
     }
 
+    public boolean getDay(int i) {
+        return days[i];
+    }
 }

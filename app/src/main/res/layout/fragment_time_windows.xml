@@ -19,25 +19,22 @@
                 android:id="@+id/lv"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"/>
-                <!--android:choiceMode="multipleChoice"/>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true">
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="40dp">
 
                 <com.shamanland.fab.FloatingActionButton
                     android:id="@+id/add_interval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/floating_action_button_margin_normal_minus"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/floating_action_button_margin_normal"
-                    android:text="+"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
+                    android:src="@drawable/ic_fab_new"
                     app:floatingActionButtonColor="@color/dark_purple"
                     app:floatingActionButtonSize="normal"
                     >

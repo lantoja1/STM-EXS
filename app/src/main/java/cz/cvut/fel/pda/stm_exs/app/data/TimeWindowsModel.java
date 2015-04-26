@@ -27,7 +27,7 @@ public class TimeWindowsModel {
 
         TreeMap<String, TimeWindow> theme1 = new TreeMap<String, TimeWindow>();
 
-        TimeWindow tw1 = new TimeWindow();
+        TimeWindow tw1 = new TimeWindow(1);
         tw1.setStart(new Time(8, 0));
         tw1.setEnd(new Time(16, 30));
 
@@ -36,11 +36,11 @@ public class TimeWindowsModel {
 
         TreeMap<String, TimeWindow> theme2 = new TreeMap<String, TimeWindow>();
 
-        TimeWindow tw2 = new TimeWindow();
+        TimeWindow tw2 = new TimeWindow(1);
         tw2.setStart(new Time(16, 30));
         tw2.setEnd(new Time(21, 30));
 
-        TimeWindow tw3 = new TimeWindow();
+        TimeWindow tw3 = new TimeWindow(2);
         tw3.setStart(new Time(10, 0));
         tw3.setEnd(new Time(20, 0));
         tw3.setDays(new boolean[]{false, false, false, false, false, true, true});
@@ -80,8 +80,22 @@ public class TimeWindowsModel {
     }
 
     public void addTimeWindow(String theme) {
-        TimeWindow tw = new TimeWindow();
+        int id = getNextId(themesMap.get(theme));
+        TimeWindow tw = new TimeWindow(id);
         themesMap.get(theme).put(tw.toString(), tw);
+    }
+
+    private int getNextId(TreeMap<String, TimeWindow> map) {
+        if (map.isEmpty()){
+            return 0;
+        }
+        int max = 0;
+        for (Map.Entry<String, TimeWindow> e : map.entrySet()){
+            if (e.getValue().getId() > max){
+                max = e.getValue().getId();
+            }
+        }
+        return max + 1;
     }
 
     /**
@@ -99,5 +113,27 @@ public class TimeWindowsModel {
             themesMap.get(theme).remove(oldKey);
         }
         themesMap.get(theme).put(tw.toString(), tw);
+    }
+
+    public void removeTimeWindow(String theme, TimeWindow selecteditem) {
+        TreeMap<String, TimeWindow> tws = themesMap.get(theme);
+        String toDelete = "";
+        for (Map.Entry<String, TimeWindow> e : tws.entrySet()){
+            if (selecteditem.getId() == e.getValue().getId()){
+                toDelete = e.getKey();
+            }
+        }
+        tws.remove(toDelete);
+        themesMap.put(theme, tws);
+    }
+
+    public TimeWindow getTimeWindow(String theme, int twID) {
+        TreeMap<String, TimeWindow> tws = themesMap.get(theme);
+        for (Map.Entry<String, TimeWindow> e : tws.entrySet()){
+            if (twID == e.getValue().getId()){
+                return e.getValue();
+            }
+        }
+        return null;
     }
 }

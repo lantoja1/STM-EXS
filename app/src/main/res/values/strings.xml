@@ -25,4 +25,14 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_settings_details">TimeWindowsActivity</string>
     <string name="deleteTimeWindow">DELETE</string>
+    <string name="settime_start">Začátek časového okna</string>
+    <string name="settime_end">Konec časového okna</string>
+    <string name="po">Po</string>
+    <string name="ut">Út</string>
+    <string name="st">St</string>
+    <string name="ct">Čt</string>
+    <string name="pa">Pá</string>
+    <string name="so">So</string>
+    <string name="ne">Ne</string>
+    <string name="repeat_days">Opakovat ve dny:</string>
 </resources>

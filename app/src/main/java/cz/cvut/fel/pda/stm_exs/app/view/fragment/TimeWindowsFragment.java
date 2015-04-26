@@ -1,10 +1,7 @@
 package cz.cvut.fel.pda.stm_exs.app.view.fragment;
 
-
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.TimePickerDialog;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -14,22 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ExpandableListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
 import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
-import cz.cvut.fel.pda.stm_exs.app.view.adapter.ExpandableListAdapter;
 import cz.cvut.fel.pda.stm_exs.app.view.adapter.ListViewAdapter;
 
 /**
@@ -80,11 +73,6 @@ public class TimeWindowsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_time_windows, container, false);
     }
 
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
@@ -99,26 +87,21 @@ public class TimeWindowsFragment extends Fragment {
                     String theme = timeWindowsModel.getSortedThemesNames().get(getShownIndex());
                     // add a new TimeWindow to this Theme in model
                     timeWindowsModel.addTimeWindow(theme);
-//                    // update view
-//                    updateExpandableListView();
+                    // update view
                     updateListView();
                 }
             });
         }
-
-//        updateExpandableListView();
         updateListView();
-
     }
 
     // Declare Variables
     ListView list;
     ListViewAdapter listviewadapter;
     List<TimeWindow> timeWindowsList = new ArrayList<TimeWindow>();
-    String[] timeWindowsAsString;
 
     private void updateListView() {
-        // Locate the ListView in listview_main.xml
+        // Locate the ListView in xml
         list = (ListView) getActivity().findViewById(R.id.lv);
         if (list != null) {
             timeWindowsList = timeWindowsModel.getThemeTimeWindows(timeWindowsModel.getSortedThemesNames().get(getShownIndex()));
@@ -154,6 +137,7 @@ public class TimeWindowsFragment extends Fragment {
                                             .getItem(selected.keyAt(i));
                                     // Remove selected items following the ids
                                     listviewadapter.remove(selecteditem);
+                                    timeWindowsModel.removeTimeWindow(timeWindowsModel.getSortedThemesNames().get(getShownIndex()), selecteditem);
                                 }
                             }
                             // Close CAB
@@ -172,83 +156,55 @@ public class TimeWindowsFragment extends Fragment {
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-                    // TODO Auto-generated method stub
                     listviewadapter.removeSelection();
                 }
 
                 @Override
                 public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                    // TODO Auto-generated method stub
                     return false;
                 }
             });
+
+
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String theme = timeWindowsModel.getSortedThemesNames().get(getShownIndex());
+                    int twID = timeWindowsModel.getTimeWindowByViewIndices(theme, position).getId();
+                    showTimeWindowSettingsFragment(theme, twID);
+                }
+            });
+
         }
     }
 
-//    private void updateExpandableListView() {
-//        // get the listview
-//        expListView = (ExpandableListView) getActivity().findViewById(R.id.lvExp);
-//        if (expListView != null) {
-//            // preparing list data
-//            prepareListData();
-//            listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild);
-//            // setting list adapter
-//            expListView.setAdapter(listAdapter);
-//            // add listener on item click
-//            expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//                @Override
-//                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//                   // Toast.makeText(v.getContext(), "on item" + groupPosition + " > " + childPosition + " click (id is " + id + ")", Toast.LENGTH_SHORT).show();
-//                    String theme = timeWindowsModel.getSortedThemesNames().get(getShownIndex());
-//                    TimeWindow tw = timeWindowsModel.getTimeWindowByViewIndices(theme, groupPosition);
-//
-//                    switch (childPosition) {
-//                        case 0:
-//                            DialogFragment newFragment = new EditTimeDialog();
-//                            Bundle bundle = new Bundle();
-//                            bundle.putInt("hour", tw.getStart().getHour());
-//                            bundle.putInt("minute", tw.getStart().getMinute());
-//                            bundle.putString("theme", theme);
-//                            bundle.putInt("index", groupPosition);
-//                            bundle.putBoolean("start", true);
-//                            newFragment.setArguments(bundle);
-//                            newFragment.show(getActivity().getFragmentManager(), "timePicker");
-//                            break;
-//
-//                        case 1:
-//                            DialogFragment newFragment1 = new EditTimeDialog();
-//                            Bundle bundle1 = new Bundle();
-//                            bundle1.putInt("hour", tw.getEnd().getHour());
-//                            bundle1.putInt("minute", tw.getEnd().getMinute());
-//                            bundle1.putString("theme", theme);
-//                            bundle1.putInt("index", groupPosition);
-//                            bundle1.putBoolean("start", false);
-//                            newFragment1.setArguments(bundle1);
-//                            newFragment1.show(getActivity().getFragmentManager(), "timePicker");
-//                            break;
-//                    }
-//                    return false;
-//                }
-//            });
-//        }
-//    }
-//
-//
-//    /*
-//     * Preparing the list data
-//     */
-//    private void prepareListData() {
-//        listDataHeader = timeWindowsModel.getListDataHeader(getShownIndex());
-//        listDataChild = new HashMap<String, List<String>>();
-//
-//        List<String> generalOptions = new ArrayList<String>();
-//        generalOptions.add("Začátek časového okna");
-//        generalOptions.add("Konec časového okna");
-//        generalOptions.add("Opakovat ve dny");
-//
-//        for (int i = 0; i < listDataHeader.size(); i++){
-//            listDataChild.put(listDataHeader.get(i), generalOptions); // Header, Child data
-//        }
-//    }
-
+    /**
+     * Helper function to show the details of a selected item, either by
+     * displaying a fragment in-place in the current UI, or starting a
+     * whole new activity in which it is displayed.
+     */
+    void showTimeWindowSettingsFragment(String theme, int twID) {
+        // Check what fragment is currently shown and replace.
+        // Execute a transaction, replacing existing fragment with a new one inside the frame.
+        FragmentTransaction ft;
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
+        if (fragment != null) {
+            // this is a dual pane layout and here is replaced the time windows fragment
+            // with a detail of currently clicked time window
+            ft = getFragmentManager().beginTransaction();
+            ft.remove(this);
+            ft.add(R.id.time_windows_of_chosen_theme_frame, TimeWindowSettingsFragment.newInstance(theme, twID));
+            ft.addToBackStack(null);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        } else {
+            // single pane layout
+            ft = getFragmentManager().beginTransaction();
+            ft.remove(this);
+            ft.add(android.R.id.content, TimeWindowSettingsFragment.newInstance(theme, twID));
+            ft.addToBackStack(null);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        }
+    }
 }

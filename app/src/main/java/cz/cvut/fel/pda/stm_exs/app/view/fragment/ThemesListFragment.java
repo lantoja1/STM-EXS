@@ -1,5 +1,6 @@
 package cz.cvut.fel.pda.stm_exs.app.view.fragment;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -91,20 +92,16 @@ public class ThemesListFragment extends ListFragment {
             getListView().setItemChecked(index, true);
 
             // Check what fragment is currently shown, replace if needed.
-            TimeWindowsFragment details = (TimeWindowsFragment)
-                    getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
-            if (details == null || details.getShownIndex() != index) {
-                // Make new fragment to show this selection.
-                details = TimeWindowsFragment.newInstance(index);
-
-                // Execute a transaction, replacing any existing fragment
-                // with this one inside the frame.
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.commit();
+            Fragment details = getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
+            if (details != null && details instanceof TimeWindowsFragment) {
+                if (((TimeWindowsFragment) details).getShownIndex() != index) {
+                    replaceFragment(index);
+                }
+            } else if (details != null && details instanceof TimeWindowSettingsFragment_) {
+                replaceFragment(index);
+            } else if (details == null) {
+                replaceFragment(index);
             }
-
         } else {
             // Otherwise we need to launch a new activity to display
             // the dialog fragment with selected text.
@@ -113,5 +110,16 @@ public class ThemesListFragment extends ListFragment {
             intent.putExtra("index", index);
             startActivity(intent);
         }
+    }
+
+    private void replaceFragment(int index){
+        // Make new fragment to show this selection.
+        TimeWindowsFragment details = TimeWindowsFragment.newInstance(index);
+        // Execute a transaction, replacing any existing fragment
+        // with this one inside the frame.
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 }
