@@ -4,26 +4,19 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
-import android.view.ActionMode;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
+import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
+import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
+import cz.cvut.fel.pda.stm_exs.app.view.adapter.TimeWindowArrayAdapter;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cz.cvut.fel.pda.stm_exs.app.R;
-import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
-import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
-import cz.cvut.fel.pda.stm_exs.app.view.adapter.ListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +90,7 @@ public class TimeWindowsFragment extends Fragment {
 
     // Declare Variables
     ListView list;
-    ListViewAdapter listviewadapter;
+    TimeWindowArrayAdapter listviewadapter;
     List<TimeWindow> timeWindowsList = new ArrayList<TimeWindow>();
 
     private void updateListView() {
@@ -105,8 +98,8 @@ public class TimeWindowsFragment extends Fragment {
         list = (ListView) getActivity().findViewById(R.id.lv);
         if (list != null) {
             timeWindowsList = timeWindowsModel.getThemeTimeWindows(timeWindowsModel.getSortedThemesNames().get(getShownIndex()));
-            // Pass results to ListViewAdapter Class
-            listviewadapter = new ListViewAdapter(getActivity(), R.layout.list_item, timeWindowsList);
+            // Pass results to TimeWindowArrayAdapter Class
+            listviewadapter = new TimeWindowArrayAdapter(getActivity(), R.layout.list_item, timeWindowsList);
             // Binds the Adapter to the ListView
             list.setAdapter(listviewadapter);
             list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -120,7 +113,7 @@ public class TimeWindowsFragment extends Fragment {
                     final int checkedCount = list.getCheckedItemCount();
                     // Set the CAB title according to total checked items
                     mode.setTitle(checkedCount + " Selected");
-                    // Calls toggleSelection method from ListViewAdapter Class
+                    // Calls toggleSelection method from TimeWindowArrayAdapter Class
                     listviewadapter.toggleSelection(position);
                 }
 
@@ -128,7 +121,7 @@ public class TimeWindowsFragment extends Fragment {
                 public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.menu_delete:
-                            // Calls getSelectedIds method from ListViewAdapter Class
+                            // Calls getSelectedIds method from TimeWindowArrayAdapter Class
                             SparseBooleanArray selected = listviewadapter.getSelectedIds();
                             // Captures all selected ids with a loop
                             for (int i = (selected.size() - 1); i >= 0; i--) {

@@ -16,18 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activity.QuestionActivity_"
             android:label="@string/title_activity_question" >
         </activity>
+
         <activity
             android:name=".view.activity.SettingsActivity_"
             android:label="@string/title_activity_settings" >
         </activity>
+
         <activity
             android:name=".view.activity.TimeWindowsActivity_"
             android:label="@string/title_activity_settings_details" >
         </activity>
+
         <activity
                 android:name=".view.activity.ProfileActivity_"
                 android:label="@string/title_activity_profile"
@@ -36,6 +40,16 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_"/>
         </activity>
+
+        <activity
+                android:name=".view.activity.ThemesActivity_"
+                android:label="@string/title_activity_themes"
+                android:parentActivityName=".view.activity.MainActivity_">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_"/>
+        </activity>
+
         <activity
                 android:name=".view.activity.AnswersActivity_"
                 android:label="@string/title_activity_answers"

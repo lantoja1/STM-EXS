@@ -1,7 +1,5 @@
 package cz.cvut.fel.pda.stm_exs.app.domain;
 
-import java.util.Arrays;
-
 public class TimeWindow {
     private int id;
     private Time start;
@@ -55,7 +53,7 @@ public class TimeWindow {
     }
 
     private String daysToString(boolean[] days) {
-        String[] daysSt = new String[]{"Po", "Út", "St", "Čt", "Pá", "So", "Ne"};
+        String[] daysSt = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         StringBuilder st = new StringBuilder("");
         for (int i = 0; i < 7; i++){
             if (days[i]){

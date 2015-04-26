@@ -1,45 +1,28 @@
 package cz.cvut.fel.pda.stm_exs.app.view.activity;
 
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.AnswersFragment;
-import cz.cvut.fel.pda.stm_exs.app.view.fragment.AnswersFragment_;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity
-public class AnswersActivity extends Activity {
+public class ThemesActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE) {
-            // If the screen is now in landscape mode, we can show the
-            // dialog in-line with the list so we don't need this activity.
-            finish();
-            return;
-        }
-
-        if (savedInstanceState == null) {
-            // During initial setup, plug in the details fragment.
-            AnswersFragment details = new AnswersFragment_();
-            details.setArguments(getIntent().getExtras());
-            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
-        }
+        setContentView(R.layout.activity_themes);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_time_windows, menu);
-            return true;
-        }
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -55,5 +38,5 @@ public class AnswersActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-    }
 
+}

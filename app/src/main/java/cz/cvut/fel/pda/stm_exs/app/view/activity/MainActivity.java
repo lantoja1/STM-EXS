@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
 
     @Click(R.id.dashboard_answers)
     public void buttonAnswers() {
-        Intent intent = new Intent(this, AnswersActivity_.class);
+        Intent intent = new Intent(this, ThemesActivity_.class);
         startActivity(intent);
         Log.i("Dashboard:", "Action My Answers pressed");
     }

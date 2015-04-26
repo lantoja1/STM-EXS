@@ -2,10 +2,12 @@ package cz.cvut.fel.pda.stm_exs.app.data;
 
 import cz.cvut.fel.pda.stm_exs.app.domain.Answer;
 import cz.cvut.fel.pda.stm_exs.app.domain.Question;
+import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,14 +18,26 @@ import java.util.concurrent.ConcurrentHashMap;
 @EBean
 public class DataModel {
     Map<String, Question> questionMap;
+    Map<String, Sampling> samplingMap;
 
     public Question getQuestion(String questionId) {
         return questionMap.get(questionId);
     }
 
+    public List<Sampling> getSamplings(String theme) {
+        List<Sampling> samplings = new ArrayList<Sampling>();
+        for (Sampling sampling : samplingMap.values()) {
+            if (sampling.getTheme().equals(theme)) {
+                samplings.add(sampling);
+            }
+        }
+        return samplings;
+    }
+
     @AfterInject
     public void init() {
         questionMap = new ConcurrentHashMap<String, Question>();
+        samplingMap = new ConcurrentHashMap<String, Sampling>();
 
 //###########################-question1-####################################
         Question question1 = new Question();
@@ -88,6 +102,40 @@ public class DataModel {
         question4.setText("Currently I feel ... happy?");
 
         questionMap.put(question4.getId(), question4);
+
+        //###########################-sampling1-####################################
+
+        Sampling sampling = new Sampling();
+        sampling.setId("id_sampling1");
+        sampling.setTitle("Morning Shopping");
+        sampling.setDate(new Date());
+        sampling.setTheme("shopping");
+
+        samplingMap.put(sampling.getId(), sampling);
+
+        //###########################-sampling2-####################################
+
+        Sampling sampling2 = new Sampling();
+        sampling2.setId("id_sampling2");
+        sampling2.setTitle("Afternoon Shopping");
+        sampling2.setTheme("shopping");
+        sampling2.setDate(new Date());
+
+        samplingMap.put(sampling2.getId(), sampling2);
+
+        //###########################-sampling3-####################################
+
+        Sampling sampling3 = new Sampling();
+        sampling3.setId("id_sampling3");
+        sampling3.setTitle("All Day Shopping");
+        sampling3.setDate(new Date());
+        sampling3.setTheme("shopping");
+
+
+        samplingMap.put(sampling3.getId(), sampling3);
+
+
+
 
 
     }

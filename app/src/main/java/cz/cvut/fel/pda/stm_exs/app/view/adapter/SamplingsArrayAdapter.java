@@ -8,24 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
 
 import java.util.List;
 
-import cz.cvut.fel.pda.stm_exs.app.R;
-import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
-
-public class ListViewAdapter extends ArrayAdapter<TimeWindow> {
+public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
 
     Activity context;
-    List<TimeWindow> timeWindows;
+    List<Sampling> sampling;
     private SparseBooleanArray mSelectedItemsIds;
-    
-    public ListViewAdapter(Activity context, int resId, List<TimeWindow> timeWindows) {
-        super(context, resId, timeWindows);
+
+    public SamplingsArrayAdapter(Activity context, int resId, List<Sampling> samplings) {
+        super(context, resId, samplings);
         mSelectedItemsIds = new SparseBooleanArray();
         this.context = context;
-        this.timeWindows = timeWindows;
+        this.sampling = samplings;
     }
 
     private class ViewHolder {
@@ -46,8 +44,11 @@ public class ListViewAdapter extends ArrayAdapter<TimeWindow> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        TimeWindow tw = getItem(position);
+        Sampling tw = getItem(position);
+
+        //@TODO change text
         holder.twTxt.setText(tw.toString());
+
         convertView
                 .setBackgroundColor(mSelectedItemsIds.get(position) ? 0x9934B5E4
                         : Color.TRANSPARENT);
@@ -56,21 +57,20 @@ public class ListViewAdapter extends ArrayAdapter<TimeWindow> {
     }
 
     @Override
-    public void add(TimeWindow tw) {
-        timeWindows.add(tw);
+    public void add(Sampling tw) {
+        sampling.add(tw);
         notifyDataSetChanged();
-      //  Toast.makeText(context, timeWindows.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void remove(TimeWindow object) {
+    public void remove(Sampling object) {
         // super.remove(object);
-        timeWindows.remove(object);
+        sampling.remove(object);
         notifyDataSetChanged();
     }
 
-    public List<TimeWindow> getTimeWindows() {
-        return timeWindows;
+    public List<Sampling> getSampling() {
+        return sampling;
     }
 
     public void toggleSelection(int position) {

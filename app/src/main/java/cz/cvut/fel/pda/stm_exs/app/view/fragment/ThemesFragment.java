@@ -1,7 +1,5 @@
 package cz.cvut.fel.pda.stm_exs.app.view.fragment;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
-import cz.cvut.fel.pda.stm_exs.app.view.activity.TimeWindowsActivity_;
+import cz.cvut.fel.pda.stm_exs.app.view.activity.AnswersActivity_;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 
@@ -80,41 +78,41 @@ public class ThemesFragment extends ListFragment {
     void showDetails(int index) {
         mCurCheckPosition = index;
 
-        if (mDualPane) {
-            // We can display everything in-place with fragments, so update
-            // the list to highlight the selected item and show the data.
-            getListView().setItemChecked(index, true);
-
-            // Check what fragment is currently shown, replace if needed.
-            Fragment details = getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
-            if (details != null && details instanceof TimeWindowsFragment) {
-                if (((TimeWindowsFragment) details).getShownIndex() != index) {
-                    replaceFragment(index);
-                }
-            } else if (details != null && details instanceof TimeWindowSettingsFragment_) {
-                replaceFragment(index);
-            } else if (details == null) {
-                replaceFragment(index);
-            }
-        } else {
+//        if (mDualPane) {
+//            // We can display everything in-place with fragments, so update
+//            // the list to highlight the selected item and show the data.
+//            getListView().setItemChecked(index, true);
+//
+//            // Check what fragment is currently shown, replace if needed.
+//            Fragment details = getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
+//            if (details != null && details instanceof TimeWindowsFragment) {
+//                if (((TimeWindowsFragment) details).getShownIndex() != index) {
+//                    replaceFragment(index);
+//                }
+//            } else if (details != null && details instanceof TimeWindowSettingsFragment_) {
+//                replaceFragment(index);
+//            } else if (details == null) {
+//                replaceFragment(index);
+//            }
+//        } else {
             // Otherwise we need to launch a new activity to display
             // the dialog fragment with selected text.
             Intent intent = new Intent();
-            intent.setClass(getActivity(), TimeWindowsActivity_.class);
+        intent.setClass(getActivity(), AnswersActivity_.class);
             intent.putExtra("index", index);
             startActivity(intent);
-        }
+//        }
     }
 
-    private void replaceFragment(int index) {
-        // Make new fragment to show this selection.
-        TimeWindowsFragment details = TimeWindowsFragment.newInstance(index);
-        // Execute a transaction, replacing any existing fragment
-        // with this one inside the frame.
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-    }
+//    private void replaceFragment(int index) {
+//        // Make new fragment to show this selection.
+//        TimeWindowsFragment details = TimeWindowsFragment.newInstance(index);
+//        // Execute a transaction, replacing any existing fragment
+//        // with this one inside the frame.
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        ft.commit();
+//    }
 
 }
