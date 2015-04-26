@@ -93,4 +93,11 @@ public class TimeWindowsModel {
     public TimeWindow getTimeWindowByViewIndices(String theme, int groupPosition) {
         return getThemeTimeWindows(theme).get(groupPosition);
     }
+
+    public void setTimeWindow(String theme, TimeWindow tw, String oldKey) {
+        if (!oldKey.isEmpty()){
+            themesMap.get(theme).remove(oldKey);
+        }
+        themesMap.get(theme).put(tw.toString(), tw);
+    }
 }

@@ -124,6 +124,9 @@ public class TimeWindowsFragment extends Fragment {
                             Bundle bundle = new Bundle();
                             bundle.putInt("hour", tw.getStart().getHour());
                             bundle.putInt("minute", tw.getStart().getMinute());
+                            bundle.putString("theme", theme);
+                            bundle.putInt("index", groupPosition);
+                            bundle.putBoolean("start", true);
                             newFragment.setArguments(bundle);
                             newFragment.show(getActivity().getFragmentManager(), "timePicker");
                             break;
@@ -133,6 +136,9 @@ public class TimeWindowsFragment extends Fragment {
                             Bundle bundle1 = new Bundle();
                             bundle1.putInt("hour", tw.getEnd().getHour());
                             bundle1.putInt("minute", tw.getEnd().getMinute());
+                            bundle1.putString("theme", theme);
+                            bundle1.putInt("index", groupPosition);
+                            bundle1.putBoolean("start", false);
                             newFragment1.setArguments(bundle1);
                             newFragment1.show(getActivity().getFragmentManager(), "timePicker");
                             break;
