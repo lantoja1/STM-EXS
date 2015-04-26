@@ -20,7 +20,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_settings_details">TimeWindowsActivity</string>
@@ -35,4 +34,13 @@
     <string name="so">So</string>
     <string name="ne">Ne</string>
     <string name="repeat_days">Opakovat ve dny:</string>
+    <string name="title_activity_profile">My Profile</string>
+
+
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="gender">Gender</string>
+    <string name="age">Age</string>
+
+
 </resources>
