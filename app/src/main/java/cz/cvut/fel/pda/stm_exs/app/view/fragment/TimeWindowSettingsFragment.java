@@ -25,6 +25,7 @@ import java.util.Map;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
 import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel_;
+import cz.cvut.fel.pda.stm_exs.app.domain.Time;
 import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 
 /**
@@ -140,7 +141,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(0, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 0, isChecked);
                 }
             });
 
@@ -154,7 +155,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(1, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 1, isChecked);
                 }
             });
 
@@ -168,7 +169,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(2, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 2, isChecked);
                 }
             });
 
@@ -182,7 +183,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(3, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 3, isChecked);
                 }
             });
 
@@ -196,7 +197,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(4, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 4, isChecked);
                 }
             });
 
@@ -210,7 +211,7 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(5, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 5, isChecked);
                 }
             });
 
@@ -224,9 +225,15 @@ public class TimeWindowSettingsFragment extends Fragment {
                     int twID = b.getInt("TWindex");
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    tw.setDay(6, isChecked);
+                    setDayInModel(theme, timeWindowsModel, tw, 6, isChecked);
                 }
             });
         }
+    }
+
+    private void setDayInModel(String theme, TimeWindowsModel timeWindowsModel, TimeWindow tw, int index, boolean isChecked){
+        String oldKey = tw.toString();
+        tw.setDay(index, isChecked);
+        timeWindowsModel.setTimeWindow(theme, tw, oldKey);
     }
 }
