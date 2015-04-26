@@ -79,7 +79,7 @@ public class AnswersFragment extends Fragment {
             // Pass results to TimeWindowArrayAdapter Class
 
 
-            ListAdapter listviewadapter = new SamplingsArrayAdapter(getActivity(), R.layout.list_item, dataModel.getSamplings("shopping"));
+            ListAdapter listviewadapter = new SamplingsArrayAdapter(getActivity(), R.layout.answers_list_item, dataModel.getSamplings("shopping"));
             // Binds the Adapter to the ListView
             list.setAdapter(listviewadapter);
             list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

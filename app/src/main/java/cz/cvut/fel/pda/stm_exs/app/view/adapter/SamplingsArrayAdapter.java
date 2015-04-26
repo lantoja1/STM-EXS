@@ -28,6 +28,7 @@ public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
 
     private class ViewHolder {
         TextView twTxt;
+        TextView dateTxt;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -35,10 +36,12 @@ public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item, null);
+            convertView = inflater.inflate(R.layout.answers_list_item, null);
             holder = new ViewHolder();
-            holder.twTxt = (TextView) convertView
-                    .findViewById(R.id.lblListItem);
+
+            holder.twTxt = (TextView) convertView.findViewById(R.id.lblListItem);
+            holder.dateTxt = (TextView) convertView.findViewById(R.id.date_text);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -47,7 +50,8 @@ public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
         Sampling tw = getItem(position);
 
         //@TODO change text
-        holder.twTxt.setText(tw.toString());
+        holder.twTxt.setText(tw.getTitle());
+        holder.dateTxt.setText(tw.getDate().toString());
 
         convertView
                 .setBackgroundColor(mSelectedItemsIds.get(position) ? 0x9934B5E4
