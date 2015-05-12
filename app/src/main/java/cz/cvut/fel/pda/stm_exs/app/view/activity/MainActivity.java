@@ -8,11 +8,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends Activity {
+
+    @Bean
+    protected DataModel dataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

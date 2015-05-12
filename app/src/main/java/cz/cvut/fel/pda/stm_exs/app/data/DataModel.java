@@ -1,21 +1,36 @@
 package cz.cvut.fel.pda.stm_exs.app.data;
 
+import android.os.AsyncTask;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import cz.cvut.fel.pda.stm_exs.app.domain.Answer;
 import cz.cvut.fel.pda.stm_exs.app.domain.Question;
 import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author jan.lantora
  */
-@EBean
+@EBean(scope= EBean.Scope.Singleton)
 public class DataModel {
     Map<String, Question> questionMap;
     Map<String, Sampling> samplingMap;
@@ -38,7 +53,7 @@ public class DataModel {
     public void init() {
         questionMap = new ConcurrentHashMap<String, Question>();
         samplingMap = new ConcurrentHashMap<String, Sampling>();
-
+/*
 //###########################-question1-####################################
         Question question1 = new Question();
         question1.setId("id_question1");
@@ -136,7 +151,90 @@ public class DataModel {
 
 
 
+        sampling.setQuestions(new ArrayList<Question>(questionMap.values()));
 
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting().serializeNulls();
+
+        Gson gson = builder.create();
+
+        System.out.println("OBJECT SAMPLING TO JSON:");
+        System.out.println(gson.toJson(sampling)); */
+
+        String sampl1 = "http://private-650dd-expsam.apiary-mock.com/samplings/shopping/1";
+        String sampl2 = "http://private-650dd-expsam.apiary-mock.com/samplings/work/1";
+
+        // call AsyncTask to perform network operation on separate thread
+        AsyncTask<String, Void, String> task = new HttpAsyncTask().execute(sampl2);
+        try {
+            System.out.println(task.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
+
+
+    public static String GET(String url){
+        InputStream inputStream = null;
+        String result = "";
+        try {
+            // create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+            // make GET request to the given URL
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            // receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+            // convert inputstream to string
+            if(inputStream != null)
+                result = convertInputStreamToString(inputStream);
+            else
+                result = "Did not work!";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
+    }
+
+
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return GET(urls[0]);
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+        //  System.out.println(result);
+
+            GsonBuilder builder = new GsonBuilder();
+            builder.setPrettyPrinting().serializeNulls();
+            Gson gson = builder.create();
+
+            Sampling receivedSampling = gson.fromJson(result, Sampling.class);
+
+            samplingMap.put(receivedSampling.getId(), receivedSampling);
+
+            for (int i = 0; i < receivedSampling.getQuestions().size(); i++) {
+                Question q = receivedSampling.getQuestions().get(i);
+                questionMap.put(q.getId(), q);
+            }
+        }
+    }
+
 }
