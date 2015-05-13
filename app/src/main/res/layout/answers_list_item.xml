@@ -15,7 +15,6 @@
             android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
             android:background="?android:attr/activatedBackgroundIndicator"
             android:minHeight="?android:attr/listPreferredItemHeightSmall"
-            android:text="title"
             />
 
     <TextView
@@ -25,8 +24,6 @@
             android:background="?android:attr/activatedBackgroundIndicator"
             android:minHeight="?android:attr/listPreferredItemHeightSmall"
             android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-
-            android:text="title"
             />
 
 </LinearLayout>
