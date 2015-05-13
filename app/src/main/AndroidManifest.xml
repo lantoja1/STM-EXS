@@ -58,6 +58,8 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_"/>
         </activity>
+
+        <service android:name=".service.NewSamplingCheckService_"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

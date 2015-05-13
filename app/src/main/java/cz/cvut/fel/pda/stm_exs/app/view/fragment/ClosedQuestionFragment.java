@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
@@ -17,6 +18,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +38,7 @@ public class ClosedQuestionFragment extends Fragment {
     protected TextView questionTextView;
 
     @ViewById(R.id.question_answers)
-    protected ViewGroup answersGroup;
+    protected RadioGroup answersGroup;
 
     private Question question;
 
@@ -43,8 +46,8 @@ public class ClosedQuestionFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ClosedQuestionFragment.
      * @param question
+     * @return A new instance of fragment ClosedQuestionFragment.
      */
     public static ClosedQuestionFragment newInstance(Question question) {
         ClosedQuestionFragment fragment = new ClosedQuestionFragment_();
@@ -81,16 +84,35 @@ public class ClosedQuestionFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        for (Answer answer : question.getAnswers()) {
+        for (int i = 0; i < question.getAnswers().size(); i++) {
+
+            Answer answer = question.getAnswers().get(i);
             RadioButton button = new RadioButton(getActivity());
+            button.setId(i);
             button.setLayoutParams(params);
             button.setPadding(15, 20, 0, 20);
             button.setTypeface(Typeface.DEFAULT_BOLD);
             button.setTextSize(19);
             button.setText(answer.getText());
+            if (question.getSelectedAnswers() != null && !question.getSelectedAnswers().isEmpty() && question.getSelectedAnswers().contains(answer)) {
+                button.setChecked(Boolean.TRUE);
+            }
 
             answersGroup.addView(button);
         }
+
+
+        answersGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (question.getSelectedAnswers() == null) {
+                    question.setSelectedAnswers(new ArrayList<Answer>());
+                }
+                question.getSelectedAnswers().clear();
+
+                question.getSelectedAnswers().add(question.getAnswers().get(checkedId));
+            }
+        });
         Log.i("Activity", "Fragment: Closed question views rendered");
     }
 }

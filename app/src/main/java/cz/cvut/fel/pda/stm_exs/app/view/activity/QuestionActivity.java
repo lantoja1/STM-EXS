@@ -27,9 +27,13 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+import cz.cvut.fel.pda.stm_exs.app.domain.QaType;
+import cz.cvut.fel.pda.stm_exs.app.domain.Question;
+import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
 import cz.cvut.fel.pda.stm_exs.app.view.adapter.QuestionsPagerAdapter;
 import cz.cvut.fel.pda.stm_exs.app.view.fragment.*;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 
 import java.util.ArrayList;
@@ -108,12 +112,33 @@ public class QuestionActivity extends FragmentActivity {
 
 
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(ClosedQuestionFragment.newInstance(dataModel.getQuestion("id_question1")));
-        fragments.add(MeasureQuestionFragment.newInstance(dataModel.getQuestion("id_question4")));
-        fragments.add(OpenQuestionFragment.newInstance(dataModel.getQuestion("id_question2")));
-        fragments.add(MultiClosedQuestionFragment.newInstance(dataModel.getQuestion("id_question3")));
+        Sampling sampling = dataModel.getSampling();
+        for (Question question : sampling.getQuestions()) {
+            if (question.getType() == QaType.CLOSED) {
+                fragments.add(ClosedQuestionFragment.newInstance(question));
+            } else if (question.getType() == QaType.MEASURE) {
+                fragments.add(MeasureQuestionFragment.newInstance(question));
+            } else if (question.getType() == QaType.OPEN) {
+                fragments.add(OpenQuestionFragment.newInstance(question));
+            } else if (question.getType() == QaType.MULTICLOSED) {
+                fragments.add(MultiClosedQuestionFragment.newInstance(question));
+            }
+        }
         fragments.add(EndSamplingFragment.newInstance());
+
         return fragments;
+    }
+
+    @Click(R.id.button_next)
+    public void MoveNext() {
+        //it doesn't matter if you're already in the last item
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+    }
+
+    @Click(R.id.button_prev)
+    public void MovePrevious() {
+        //it doesn't matter if you're already in the first item
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
     }
 
 }

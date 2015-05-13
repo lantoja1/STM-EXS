@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
@@ -17,6 +18,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,18 +83,37 @@ public class MultiClosedQuestionFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        for (Answer answer : question.getAnswers()) {
+        for (int i = 0; i < question.getAnswers().size(); i++) {
+
+            Answer answer = question.getAnswers().get(i);
+
             CheckBox checkBox = new CheckBox(getActivity());
+            checkBox.setId(i);
             checkBox.setLayoutParams(params);
             checkBox.setPadding(15, 20, 0, 20);
             checkBox.setTypeface(Typeface.DEFAULT_BOLD);
             checkBox.setTextSize(19);
             checkBox.setText(answer.getText());
+            if (question.getSelectedAnswers() != null && question.getSelectedAnswers().contains(answer)) {
+                checkBox.setChecked(Boolean.TRUE);
+            }
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (question.getSelectedAnswers() == null) {
+                        question.setSelectedAnswers(new ArrayList<Answer>());
+                    }
+                    if (isChecked) {
+                        question.getSelectedAnswers().add(question.getAnswers().get(buttonView.getId()));
+                    } else {
+                        question.getSelectedAnswers().remove(question.getAnswers().get(buttonView.getId()));
+                    }
+                }
+            });
 
             answersGroup.addView(checkBox);
         }
         Log.i("Activity", "Fragment: MultiClosed question views rendered");
     }
-
 
 }

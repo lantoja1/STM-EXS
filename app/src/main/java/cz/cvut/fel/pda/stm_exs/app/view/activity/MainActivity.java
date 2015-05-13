@@ -4,16 +4,16 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
-
+import cz.cvut.fel.pda.stm_exs.app.service.NewSamplingCheckService_;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, NewSamplingCheckService_.class));
+
         //setContentView(R.layout.activity_main);
     }
 
@@ -58,9 +60,13 @@ public class MainActivity extends Activity {
 
     @Click(R.id.action_start)
     public void startSampling() {
-        Intent intent = new Intent(this, QuestionActivity_.class);
-        startActivity(intent);
-        Log.i("Dashboard:", "Action Start sampling pressed");
+        if (dataModel.getSampling() == null) {
+            Toast.makeText(this, "You have no samplings!", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, QuestionActivity_.class);
+            startActivity(intent);
+            Log.i("Dashboard:", "Action Start sampling pressed");
+        }
     }
 
     @Click(R.id.dashboard_profile)
@@ -86,7 +92,9 @@ public class MainActivity extends Activity {
 
     @Click(R.id.dashboard_skip)
     public void buttonSkip() {
-
+        if (dataModel.getSampling() != null) {
+            dataModel.clear();
+        }
         notifyMe();
 
         Log.i("Dashboard:", "Button skip pressed");
@@ -102,7 +110,8 @@ public class MainActivity extends Activity {
         // play sound, vibrations and light diod
         builder.setDefaults(Notification.DEFAULT_ALL);
 
-/*        Intent resultIntent = new Intent(this, QuestionActivity_.class);
+/*
+        Intent resultIntent = new Intent(this, QuestionActivity_.class);
         resultIntent.
 
         Intent postpone15intent = new Intent(this, OurService.class);
@@ -116,7 +125,8 @@ public class MainActivity extends Activity {
         String msg = "There are few new questions for you.";
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(msg));
         builder.addAction(R.drawable.notification_postpone, "Postpone by 15 mins", postpone15);
-        builder.addAction (R.drawable.notification_postpone, "Postpone by 60 mins", postpone60);*/
+        builder.addAction (R.drawable.notification_postpone, "Postpone by 60 mins", postpone60);
+*/
 
         nm.notify(1, builder.build());
     }

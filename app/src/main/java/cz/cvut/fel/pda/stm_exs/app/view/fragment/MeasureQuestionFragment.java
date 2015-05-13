@@ -6,14 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+import cz.cvut.fel.pda.stm_exs.app.domain.Answer;
+import cz.cvut.fel.pda.stm_exs.app.domain.QaType;
 import cz.cvut.fel.pda.stm_exs.app.domain.Question;
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.*;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +29,9 @@ public class MeasureQuestionFragment extends Fragment {
 
     @ViewById(R.id.question_text)
     protected TextView questionTextView;
+
+    @ViewById(R.id.question_answer)
+    protected SeekBar answerSeekBar;
 
     private Question question;
 
@@ -69,7 +74,23 @@ public class MeasureQuestionFragment extends Fragment {
     @AfterViews
     protected void initViews() {
         questionTextView.setText(question.getText());
+        if (question.getSelectedAnswers() != null && !question.getSelectedAnswers().isEmpty()) {
+            answerSeekBar.setProgress(Integer.parseInt(question.getSelectedAnswers().get(0).getText()));
+        }
         Log.i("Activity", "Fragment: Measure question views rendered");
+    }
+
+    @SeekBarProgressChange(R.id.question_answer)
+    void onProgressChangeOnSeekBar(SeekBar seekBar, int progress) {
+        if (question.getSelectedAnswers() == null) {
+            question.setSelectedAnswers(new ArrayList<Answer>());
+        }
+        question.getSelectedAnswers().clear();
+        Answer answer = new Answer();
+        answer.setText(String.valueOf(progress));
+        answer.setType(QaType.MEASURE);
+        answer.setId("id_answer1");
+        question.getSelectedAnswers().add(answer);
     }
 
 

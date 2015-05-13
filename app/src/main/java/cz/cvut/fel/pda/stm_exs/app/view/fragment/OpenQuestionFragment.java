@@ -6,14 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+import cz.cvut.fel.pda.stm_exs.app.domain.Answer;
+import cz.cvut.fel.pda.stm_exs.app.domain.QaType;
 import cz.cvut.fel.pda.stm_exs.app.domain.Question;
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.*;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +31,9 @@ public class OpenQuestionFragment extends Fragment {
 
     @ViewById(R.id.question_text)
     protected TextView questionTextView;
+
+    @ViewById(R.id.question_answer)
+    protected EditText answerEditText;
 
     private Question question;
 
@@ -75,7 +80,27 @@ public class OpenQuestionFragment extends Fragment {
     @AfterViews
     protected void initViews() {
         questionTextView.setText(question.getText());
+        if (question.getSelectedAnswers() != null && !question.getSelectedAnswers().isEmpty()) {
+            answerEditText.setText(question.getSelectedAnswers().get(0).getText());
+        }
         Log.i("Activity", "Fragment: Open question views rendered");
-
     }
+
+    @AfterTextChange(R.id.question_answer)
+    protected void afterTextChangedOnHelloTextView() {
+        if (question.getSelectedAnswers() == null) {
+            question.setSelectedAnswers(new ArrayList<Answer>());
+        }
+        String answerText = answerEditText.getText().toString();
+        if (!answerText.isEmpty()) {
+            question.getSelectedAnswers().clear();
+            Answer answer = new Answer();
+            answer.setText(answerText);
+            answer.setType(QaType.OPEN);
+            answer.setId("id_answer1");
+            question.getSelectedAnswers().add(answer);
+        }
+    }
+
+
 }

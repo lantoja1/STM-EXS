@@ -11,6 +11,7 @@ import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
 
+import java.util.Date;
 import java.util.List;
 
 public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
@@ -51,6 +52,9 @@ public class SamplingsArrayAdapter extends ArrayAdapter<Sampling> {
 
         //@TODO change text
         holder.twTxt.setText(tw.getTitle());
+        if (tw.getDate() == null) {
+            tw.setDate(new Date());
+        }
         holder.dateTxt.setText(tw.getDate().toString());
 
         convertView
