@@ -82,6 +82,9 @@ public class TimeWindowsFragment extends Fragment {
                     timeWindowsModel.addTimeWindow(theme);
                     // update view
                     updateListView();
+                    // show time windows settings fragment
+                    int twID = timeWindowsModel.getTimeWindowByViewIndices(theme, 0).getId();
+                    showTimeWindowSettingsFragment(theme, twID);
                 }
             });
         }
