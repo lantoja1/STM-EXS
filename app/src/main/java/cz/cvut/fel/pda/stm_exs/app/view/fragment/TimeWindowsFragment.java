@@ -89,6 +89,16 @@ public class TimeWindowsFragment extends Fragment {
             });
         }
         updateListView();
+
+        // set title
+        String theme = timeWindowsModel.getSortedThemesNames().get(getShownIndex());
+        if (theme == null) {
+            theme = "";
+        } else {
+            theme = " - " + theme;
+        }
+        getActivity().getActionBar().setTitle(
+        getResources().getString(R.string.title_activity_settings_details) + theme);
     }
 
     // Declare Variables
