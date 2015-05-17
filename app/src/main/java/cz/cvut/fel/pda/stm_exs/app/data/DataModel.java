@@ -6,6 +6,7 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,7 +29,11 @@ public class DataModel {
      * @return the oldest Sampling with proper theme
      */
     public Sampling getSampling() {
-        return samplingMap.get("id_sampling1");
+        Collection<Sampling> samplings = samplingMap.values();
+        if (samplings != null && !samplings.isEmpty()) {
+            return samplings.iterator().next();
+        }
+        return null;
     }
 
     public List<Sampling> getSamplings(String theme) {

@@ -25,7 +25,7 @@ public class TimeWindowsModel {
         tw1.setEnd(new Time(16, 30));
 
         theme1.put(tw1.toString(), tw1);
-        themesMap.put("Work", theme1);
+        themesMap.put("work", theme1);
 
         TreeMap<String, TimeWindow> theme2 = new TreeMap<String, TimeWindow>();
 
@@ -128,5 +128,9 @@ public class TimeWindowsModel {
             }
         }
         return null;
+    }
+
+    public Map<String, TreeMap<String, TimeWindow>> getThemesMap() {
+        return themesMap;
     }
 }

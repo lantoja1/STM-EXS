@@ -9,7 +9,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
+import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
 import cz.cvut.fel.pda.stm_exs.app.domain.Sampling;
+import cz.cvut.fel.pda.stm_exs.app.domain.Time;
+import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 import cz.cvut.fel.pda.stm_exs.app.service.rest.RESTClientErrorHandler;
 import cz.cvut.fel.pda.stm_exs.app.service.rest.RESTClientService;
 import cz.cvut.fel.pda.stm_exs.app.view.activity.MainActivity_;
@@ -17,9 +20,7 @@ import org.androidannotations.annotations.*;
 import org.androidannotations.annotations.rest.RestService;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * CheckingService
@@ -45,6 +46,9 @@ public class NewSamplingCheckService extends Service {
 
     @Bean
     DataModel dataModel;
+
+    @Bean
+    TimeWindowsModel timeWindowsModel;
 
     /**
      * Handle REST service exceptions
@@ -92,13 +96,53 @@ public class NewSamplingCheckService extends Service {
         timer = null;
     }
 
+    private boolean isTime(TimeWindow window) {
+
+        Calendar c = Calendar.getInstance();
+        Date now = c.getTime();
+        int day = c.get(Calendar.DAY_OF_WEEK) - 1;
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+        if (window.getDay(day)) {
+            Time start = window.getStart();
+            Time end = window.getEnd();
+            if (start.getHour() == hour && hour == end.getHour()) {
+                if (start.getMinute() <= minute && minute <= end.getMinute()) {
+                    return true;
+                }
+            } else if (start.getHour() == hour && hour < end.getHour()) {
+                if (start.getMinute() <= minute) {
+                    return true;
+                }
+            } else if (start.getHour() < hour && hour == end.getHour()) {
+                if (minute <= end.getMinute()) {
+                    return true;
+                }
+            } else if (start.getHour() < hour && hour < end.getHour()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Gets list of records earlier than given date (obtained from
      * uiComponentModel)
      */
     @Background
     void downloadNewDataFromServer() {
-        Sampling sampling = restClientService.getSampling("shopping", "1");
+        Sampling sampling = null;
+        Map<String, TreeMap<String, TimeWindow>> themesMap = timeWindowsModel.getThemesMap();
+        for (Map.Entry<String, TreeMap<String, TimeWindow>> mapEntry : themesMap.entrySet()) {
+            TreeMap<String, TimeWindow> value = mapEntry.getValue();
+            for (TimeWindow timeWindow : value.values()) {
+                if (isTime(timeWindow)) {
+                    sampling = restClientService.getSampling(mapEntry.getKey(), "1");
+                }
+            }
+        }
+
+
 
         if (sampling != null && !dataModel.hasSampling(sampling)) {
             dataModel.saveSampling(sampling);

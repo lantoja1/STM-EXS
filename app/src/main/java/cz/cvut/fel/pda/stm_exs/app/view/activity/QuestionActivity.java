@@ -25,6 +25,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
+import android.widget.TextView;
 import cz.cvut.fel.pda.stm_exs.app.R;
 import cz.cvut.fel.pda.stm_exs.app.data.DataModel;
 import cz.cvut.fel.pda.stm_exs.app.domain.QaType;
@@ -35,6 +36,7 @@ import cz.cvut.fel.pda.stm_exs.app.view.fragment.*;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,11 @@ public class QuestionActivity extends FragmentActivity {
     @Bean
     protected DataModel dataModel;
 
+    @ViewById(R.id.theme_progress)
+    protected TextView titleTextView;
+
+    private int samplingSize;
+    private String theme;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide fragments representing
      * each object in a collection. We use a {@link android.support.v4.app.FragmentStatePagerAdapter}
@@ -80,6 +87,25 @@ public class QuestionActivity extends FragmentActivity {
         // Set up the ViewPager, attaching the adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mDemoCollectionPagerAdapter);
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                position++;
+                titleTextView.setText(theme + " " + position + "/" + samplingSize);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     @Override
@@ -126,6 +152,11 @@ public class QuestionActivity extends FragmentActivity {
         }
         fragments.add(EndSamplingFragment.newInstance());
 
+        samplingSize = fragments.size();
+        theme = sampling.getTheme();
+        titleTextView.setText(theme + " 1/" + samplingSize);
+
+
         return fragments;
     }
 
@@ -139,6 +170,7 @@ public class QuestionActivity extends FragmentActivity {
     public void MovePrevious() {
         //it doesn't matter if you're already in the first item
         mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+
     }
 
 }

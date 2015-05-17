@@ -2,31 +2,22 @@ package cz.cvut.fel.pda.stm_exs.app.view.fragment;
 
 
 import android.app.DialogFragment;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
-import org.androidannotations.annotations.Bean;
+import android.widget.*;
+import cz.cvut.fel.pda.stm_exs.app.R;
+import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
+import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel_;
+import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 import org.androidannotations.annotations.EFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cz.cvut.fel.pda.stm_exs.app.R;
-import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel;
-import cz.cvut.fel.pda.stm_exs.app.data.TimeWindowsModel_;
-import cz.cvut.fel.pda.stm_exs.app.domain.Time;
-import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -132,22 +123,8 @@ public class TimeWindowSettingsFragment extends Fragment {
 
             // add listeners and model values to days checkboxes
             CheckBox po = (CheckBox) getActivity().findViewById(R.id.po);
-            po.setChecked(tw.getDay(0));
+            po.setChecked(tw.getDay(1));
             po.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Bundle b = getArguments();
-                    String theme = b.getString("theme");
-                    int twID = b.getInt("TWindex");
-                    TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
-                    TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
-                    setDayInModel(theme, timeWindowsModel, tw, 0, isChecked);
-                }
-            });
-
-            CheckBox ut = (CheckBox) getActivity().findViewById(R.id.ut);
-            ut.setChecked(tw.getDay(1));
-            ut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -159,9 +136,9 @@ public class TimeWindowSettingsFragment extends Fragment {
                 }
             });
 
-            CheckBox st = (CheckBox) getActivity().findViewById(R.id.st);
-            st.setChecked(tw.getDay(2));
-            st.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            CheckBox ut = (CheckBox) getActivity().findViewById(R.id.ut);
+            ut.setChecked(tw.getDay(2));
+            ut.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -173,9 +150,9 @@ public class TimeWindowSettingsFragment extends Fragment {
                 }
             });
 
-            CheckBox ct = (CheckBox) getActivity().findViewById(R.id.ct);
-            ct.setChecked(tw.getDay(3));
-            ct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            CheckBox st = (CheckBox) getActivity().findViewById(R.id.st);
+            st.setChecked(tw.getDay(3));
+            st.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -187,9 +164,9 @@ public class TimeWindowSettingsFragment extends Fragment {
                 }
             });
 
-            CheckBox pa = (CheckBox) getActivity().findViewById(R.id.pa);
-            pa.setChecked(tw.getDay(4));
-            pa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            CheckBox ct = (CheckBox) getActivity().findViewById(R.id.ct);
+            ct.setChecked(tw.getDay(4));
+            ct.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -201,9 +178,9 @@ public class TimeWindowSettingsFragment extends Fragment {
                 }
             });
 
-            CheckBox so = (CheckBox) getActivity().findViewById(R.id.so);
-            so.setChecked(tw.getDay(5));
-            so.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            CheckBox pa = (CheckBox) getActivity().findViewById(R.id.pa);
+            pa.setChecked(tw.getDay(5));
+            pa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -215,9 +192,9 @@ public class TimeWindowSettingsFragment extends Fragment {
                 }
             });
 
-            CheckBox ne = (CheckBox) getActivity().findViewById(R.id.ne);
-            ne.setChecked(tw.getDay(6));
-            ne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            CheckBox so = (CheckBox) getActivity().findViewById(R.id.so);
+            so.setChecked(tw.getDay(6));
+            so.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Bundle b = getArguments();
@@ -226,6 +203,20 @@ public class TimeWindowSettingsFragment extends Fragment {
                     TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
                     TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
                     setDayInModel(theme, timeWindowsModel, tw, 6, isChecked);
+                }
+            });
+
+            CheckBox ne = (CheckBox) getActivity().findViewById(R.id.ne);
+            ne.setChecked(tw.getDay(0));
+            ne.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Bundle b = getArguments();
+                    String theme = b.getString("theme");
+                    int twID = b.getInt("TWindex");
+                    TimeWindowsModel timeWindowsModel = TimeWindowsModel_.getInstance_(getActivity());
+                    TimeWindow tw = timeWindowsModel.getTimeWindow(theme, twID);
+                    setDayInModel(theme, timeWindowsModel, tw, 0, isChecked);
                 }
             });
         }

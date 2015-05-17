@@ -12,8 +12,6 @@
     <string name="title_activity_question">Sampling questions</string>
     <string name="next">&gt;&gt;</string>
     <string name="back">&lt;&lt;</string>
-    <string name="theme">Shopping</string>
-
 
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_settings_details">Time Windows</string>

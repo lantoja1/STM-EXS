@@ -53,7 +53,7 @@ public class TimeWindow {
     }
 
     private String daysToString(boolean[] days) {
-        String[] daysSt = new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+        String[] daysSt = new String[]{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         StringBuilder st = new StringBuilder("");
         for (int i = 0; i < 7; i++){
             if (days[i]){
