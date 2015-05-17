@@ -172,6 +172,7 @@ public class NewSamplingCheckService extends Service {
         PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
         notification.setTicker(MessageFormat.format("New samplings!!!", sampling.getTheme()));
+        notification.setAutoCancel(true);
 
         notificationManager.notify(0, notification.build());
     }
