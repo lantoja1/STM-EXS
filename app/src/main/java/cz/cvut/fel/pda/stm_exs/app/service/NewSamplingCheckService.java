@@ -133,22 +133,21 @@ public class NewSamplingCheckService extends Service {
      */
     @Background
     void downloadNewDataFromServer() {
-        Sampling sampling = null;
         Map<String, TreeMap<String, TimeWindow>> themesMap = timeWindowsModel.getThemesMap();
         for (Map.Entry<String, TreeMap<String, TimeWindow>> mapEntry : themesMap.entrySet()) {
             TreeMap<String, TimeWindow> value = mapEntry.getValue();
             for (TimeWindow timeWindow : value.values()) {
                 if (isTime(timeWindow)) {
-                    sampling = restClientService.getSampling(mapEntry.getKey(), "1");
+                    Sampling sampling = restClientService.getSampling(mapEntry.getKey(), "1");
+                    if (sampling != null && !dataModel.hasSampling(sampling)) {
+                        dataModel.saveSampling(sampling);
+                        makeNotification(sampling);
+                        return;
+                    }
                 }
             }
         }
 
-
-        if (sampling != null && !dataModel.hasSampling(sampling)) {
-            dataModel.saveSampling(sampling);
-            makeNotification(sampling);
-        }
     }
 
     /**
