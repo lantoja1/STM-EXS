@@ -1,19 +1,12 @@
 package cz.cvut.fel.pda.stm_exs.app.data;
 
+import cz.cvut.fel.pda.stm_exs.app.domain.Time;
+import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.EBean;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-
-import cz.cvut.fel.pda.stm_exs.app.domain.Time;
-import cz.cvut.fel.pda.stm_exs.app.domain.TimeWindow;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class TimeWindowsModel {
@@ -51,7 +44,7 @@ public class TimeWindowsModel {
 
         TreeMap<String, TimeWindow> theme3 = new TreeMap<String, TimeWindow>();
 
-        themesMap.put("Shopping", theme3);
+        themesMap.put("shopping", theme3);
     }
 
 

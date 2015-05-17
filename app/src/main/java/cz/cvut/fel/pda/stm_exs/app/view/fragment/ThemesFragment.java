@@ -77,42 +77,14 @@ public class ThemesFragment extends ListFragment {
      */
     void showDetails(int index) {
         mCurCheckPosition = index;
+        String theme = timeWindowsModel.getSortedThemesNames().get(index);
 
-//        if (mDualPane) {
-//            // We can display everything in-place with fragments, so update
-//            // the list to highlight the selected item and show the data.
-//            getListView().setItemChecked(index, true);
-//
-//            // Check what fragment is currently shown, replace if needed.
-//            Fragment details = getFragmentManager().findFragmentById(R.id.time_windows_of_chosen_theme_frame);
-//            if (details != null && details instanceof TimeWindowsFragment) {
-//                if (((TimeWindowsFragment) details).getShownIndex() != index) {
-//                    replaceFragment(index);
-//                }
-//            } else if (details != null && details instanceof TimeWindowSettingsFragment_) {
-//                replaceFragment(index);
-//            } else if (details == null) {
-//                replaceFragment(index);
-//            }
-//        } else {
-            // Otherwise we need to launch a new activity to display
-            // the dialog fragment with selected text.
             Intent intent = new Intent();
         intent.setClass(getActivity(), AnswersActivity_.class);
             intent.putExtra("index", index);
+        intent.putExtra("theme", theme);
             startActivity(intent);
-//        }
     }
 
-//    private void replaceFragment(int index) {
-//        // Make new fragment to show this selection.
-//        TimeWindowsFragment details = TimeWindowsFragment.newInstance(index);
-//        // Execute a transaction, replacing any existing fragment
-//        // with this one inside the frame.
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.replace(R.id.time_windows_of_chosen_theme_frame, details);
-//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        ft.commit();
-//    }
 
 }

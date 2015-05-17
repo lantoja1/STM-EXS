@@ -78,8 +78,9 @@ public class AnswersFragment extends Fragment {
         if (list != null) {
             // Pass results to TimeWindowArrayAdapter Class
 
+            String theme = getArguments().getString("theme", "");
 
-            ListAdapter listviewadapter = new SamplingsArrayAdapter(getActivity(), R.layout.answers_list_item, dataModel.getSamplings("shopping"));
+            ListAdapter listviewadapter = new SamplingsArrayAdapter(getActivity(), R.layout.answers_list_item, dataModel.getSamplings(theme));
             // Binds the Adapter to the ListView
             list.setAdapter(listviewadapter);
             list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

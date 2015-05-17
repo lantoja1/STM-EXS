@@ -1,6 +1,5 @@
 package cz.cvut.fel.pda.stm_exs.app.view.activity;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -28,8 +27,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         startService(new Intent(this, NewSamplingCheckService_.class));
-
-        //setContentView(R.layout.activity_main);
     }
 
 
@@ -37,9 +34,6 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        ActionBar actionBar = getActionBar();
-        //actionBar.
-
         return true;
     }
 
@@ -95,7 +89,6 @@ public class MainActivity extends Activity {
         if (dataModel.getSampling() != null) {
             dataModel.clear();
         }
-        notifyMe();
 
         Log.i("Dashboard:", "Button skip pressed");
     }
