@@ -1,7 +1,9 @@
 package cz.cvut.fel.pda.stm_exs.app.service;
 
-import android.app.*;
-import android.content.Context;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -143,7 +145,6 @@ public class NewSamplingCheckService extends Service {
         }
 
 
-
         if (sampling != null && !dataModel.hasSampling(sampling)) {
             dataModel.saveSampling(sampling);
             makeNotification(sampling);
@@ -160,7 +161,8 @@ public class NewSamplingCheckService extends Service {
 
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle("New questionaire arrived")
-                .setContentText("Hello World!")
+                .setContentText("Theme: "
+                        + sampling.getTheme() + " has " + sampling.getTitle())
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Intent intent = new Intent(this, MainActivity_.class);
@@ -192,23 +194,7 @@ public class NewSamplingCheckService extends Service {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
-
-                // Here we start from 1 because on position 0 there is currently
-                // running application
-                // and we want to download data from server only if our
-                // application is in background
-                for (int i = 1; i < runningAppProcesses.size(); i++) {
-                    ActivityManager.RunningAppProcessInfo appProcessInfo = runningAppProcesses.get(i);
-
-                    // if it is our application and is in background, then
-                    // download data
-                    if (appProcessInfo.processName.equals(getBaseContext().getPackageName())
-                            && appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                        downloadNewDataFromServer();
-                    }
-                }
+                downloadNewDataFromServer();
             }
         }, millisecondsInterval, millisecondsInterval);
     }
