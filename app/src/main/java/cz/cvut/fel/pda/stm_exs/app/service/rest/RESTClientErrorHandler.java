@@ -8,7 +8,6 @@ import org.springframework.core.NestedRuntimeException;
 /*
  *Handles and logs exceptions from REST Client service
  *
- * Copyright (c) 2014 Aspectworks, spol. s.r.o.
  * @author: jan.lantora
  * @version $Revision$
  */

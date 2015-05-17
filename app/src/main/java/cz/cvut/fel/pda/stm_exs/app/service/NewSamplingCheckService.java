@@ -32,10 +32,8 @@ import java.util.*;
  * checking is changed in settings, this service is stopped and started again
  * from @SettingsFragment
  * <p/>
- * Copyright (c) 2014 AspectWorks, spol. s r.o.
  *
- * @author david.passler
- * @version $Revision$
+ * @author Jan Lantora
  */
 @EService
 public class NewSamplingCheckService extends Service {

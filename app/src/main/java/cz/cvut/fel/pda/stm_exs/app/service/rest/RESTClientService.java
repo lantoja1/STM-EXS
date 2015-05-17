@@ -14,7 +14,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
  * framework
  *
  * @author jan.lantora.
- * @version $Revision$
  */
 @Rest(rootUrl = "http://private-650dd-expsam.apiary-mock.com/samplings/", converters = {MappingJackson2HttpMessageConverter.class})
 public interface RESTClientService extends RestClientErrorHandling {
